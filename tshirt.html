@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<title>Royce Prints</title>
+<style>
+  body{
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    height: 100vh;
+
+  }
+   
+  .header {
+    background-color: #fff;
+    color: black;
+    padding: 10px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 10;
+   position: sticky;
+   top: 0;
+  }
+  .logo {
+    margin-left: 20px;
+    font-size: 24px;
+    font-weight: bold;
+  }
+  .menu {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .menu a {
+    color: black;
+    text-decoration: none;
+    margin: 0 15px;
+    font-weight: bold;
+  }
+  .search {
+    margin-right: 20px;
+  }
+  .search input[type="text"] {
+    padding: 5px;
+    border: none;
+    border-radius: 3px;
+  }
+/*header end*/
+.fa {
+  padding: 10px;
+  font-size: 16px;
+  
+  text-align: center;
+  text-decoration: none;
+  margin: 5px 2px;
+}
+
+.fa:hover {
+    opacity: 0.7;
+}
+
+.fa-facebook {
+  background: #3B5998;
+  color: white;
+}
+
+.fa-twitter {
+  background: #55ACEE;
+  color: white;
+}
+/*social media end*/
+
+  .slider-container {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    height: 400px;
+  }
+  .slider {
+    display: flex;
+    position: relative;
+    transition: transform 0.5s ease-in-out;
+  }
+  .slide {
+    flex: 0 0 100%;
+    height: 100%;
+    background-color: #f0f0f0;
+  }
+  .product-details {
+    position: fixed;
+    right: 30px;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 20px;
+    width: 250px;
+    border-radius: 25px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    z-index: 10;
+
+  background: rgba( 255, 255, 255, 0.5 );
+box-shadow: 0 8px 12px 0 rgba( 31, 38, 135, 0.37 );
+backdrop-filter: blur( 1px );
+-webkit-backdrop-filter: blur( 1px );
+border: 1px solid rgba( 255, 255, 255, 0.18 );
+  }
+  .product-title {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  .product-price {
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+  .product-colors {
+    margin-bottom: 10px;
+  }
+  .color {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    margin-right: 5px;
+    border: 1px solid grey;
+  }
+  .product-sizes {
+    margin-bottom: 10px;
+  }
+  .size {
+    display: inline-block;
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    margin-right: 5px;
+   
+  }
+  .size:hover{
+    background-color: black;
+    color: white;
+  }
+  .add-to-cart {
+    background-color: #333;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 10px;
+  }
+  .free-shipping {
+    font-size: 14px;
+    text-align: center;
+    margin-bottom: 10px;
+  }
+  .social-icons {
+    display: flex;
+    justify-content: center;
+  }
+  .social-icon {
+    font-size: 24px;
+    margin: 0 10px;
+    color: #000;
+  }
+
+/* slider end */
+/* Slider navigation arrows */
+  .slider-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 40px;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    text-align: center;
+    line-height: 40px;
+    font-size: 20px;
+    cursor: pointer;
+    z-index: 1;
+  }
+   .prev {
+    left: 10px;
+  }
+
+  .swiper-button-next {
+    right: 370px;
+  }
+
+  .swiper-container {
+     text-align: center;
+    width: 100%;
+
+  }
+
+  .swiper-slide {
+    display: none;
+   text-align: center;
+      height: 100vh;
+    background-color: #f0f0f0;
+    
+  }
+  
+.cart-icon {
+  margin-right: 20px;
+}
+
+.cart-icon a img {
+  width: 30px;
+  height: 30px;
+  vertical-align: middle;
+}
+ #formSection {
+    display: none;
+    background-color: #f7f7f7;
+    border: 1px solid #ddd;
+    padding: 30px;
+    border-radius: 5px;
+  }
+
+  #formSection form {
+    text-align: left;
+  }
+
+  #formSection label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+
+  #formSection input,
+  #formSection textarea {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+  }
+  #formSection button {
+    background-color: #333;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 3px;
+    cursor: pointer;
+  }
+
+  #formSection button:hover {
+    background-color: #555;
+  }
+  .productformdetails{
+    width: 100%;
+    display: inline-block;
+  }
+  .productformimage{
+    width: 20%;
+    float: left;
+  }
+  .productformimage img{
+    width: 100px;
+  }
+  .otherdetails{
+    width: 80%;
+    float: right;
+
+  }
+</style>
+</head>
+<body>
+
+  <div class="header">
+    <div class="logo" id="royceprints">Royce Prints</div>
+    <div class="menu">
+      <a href="#">WOMEN</a>
+      <a href="#">MEN</a>
+      <a href="#">WHO WE ARE</a>
+      <!--<div class="cart-icon">
+       Add your cart icon or button here 
+      <a href="#" id="cartButton"><img src="" alt="Cart"></a>
+    </div>-->
+    </div>
+    
+    <div class="search">
+      <input type="text" placeholder="Search...">
+    </div>
+  </div>
+  <!-- header end -->
+<div class="swiper-container" id="swiperCont">
+  <div class="swiper-wrapper"  style="background-color: white;">
+
+   <div class="swiper-slide" id="black1" ><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEglsm42ZrfaF86qhcsagwz1qq1s5Cj1axO08vfyAD3I6uyLlKameanwZAVwZMaNCmrO-KYvTZQSXQeu0ohUOmPsrNP7Ibt68gHCE5ZQpIehUNUFwbJYRjM7-v9Dcjb2Ty5TBTVpqvU6uUozG5EzGM-FgaYKD8-ypNFVfuv1IKvdBGQEhc5enH-zsw3vxFE/s320/men-rnhs-0038%20(15).png"></div>
+   <div class="swiper-slide" id="black2" ><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhhk52On1zgKetnstpWqznW7nbH4zfws3SD5uk2xQPdAaGWizDZnXF3i6KtA1Xwf8598CTEtP_URt6wHSNaxpkcDJywxepmxV8vSn3Cw-s9a6i90oP9u56IlKEdu2stlUesguj9XXUT-SDdUkMR6gPMhnMWux17kHEnWX3f1ZV3JTOPu8a3Bj4fKKcTfb8/s320/men-rnhs-0038.png"></div>
+ 
+<!-- black end -->
+    <div class="swiper-slide" id="white1" ><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgXxolrpNRsDn5RoMA3x4Bv5c2AYq-m__8smAfbo-FdYZ65aAiQM9ZopkqYZ9Ho4N7TyFKiw38vMM2mSXxRpQGVd1Qb7XkehAHSL4eHmKJqjdSAcZO6bsYR5DsSYs8YcCQ5tsMv2ARSgJuMbpf06XcYF8RLI28PCl5mQImHAIaLsyBB19m7bnJv95vpqjE/s320/men-rnhs-0038%20(14).png"></div>
+    <div class="swiper-slide" id="white2" ><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjH4hxopUlpfJemP6eIgTKaL4nqMNiQwvxvTDMl1sSALs0zIQIIZW3JGg3fJ3yw_iEhXT3ZU-CGS_3EP_k0lMHDXi_q9SsPl1rgMXkRJM3zd9hu8vqJ_Xo4Vknzx4kSB-fzh1G_ZSokXAcycr3BmjmiaaQOOK5elrQh_wVZ8sQxfDMSoKlF_82-2ruNzag/w256-h320/men-rnhs-0038%20(12).png"></div>
+<!-- white end -->
+    </div>
+  </div>
+  <div class="swiper-button-next" id="dataone"></div>
+  <div class="swiper-button-prev" id="datae"></div>
+</div>
+  <div class="product-details" id="dataon">
+    <div class="product-title">Half Sleeve</div>
+    <div class="product-price">₹499</div>
+    <p><b>COLOR</b></p>
+    <div class="product-colors">
+      <span class="color" id="blacks" style="background-color: black;"></span>
+      <span class="color" id="whites" style="background-color: whitesmoke;"></span>
+    </div>
+    <p><b>SIZE</b></p>
+    <div class="product-sizes">
+      <span class="size">S</span>
+      <span class="size">M</span>
+      <span class="size">L</span>
+      <span class="size">XL</span>
+    </div>
+    <br/>
+    <br/>
+    <button class="add-to-cart" id="cartButton">Buy Now</button>
+    <div class="free-shipping">Free Shipping</div>
+    <div class="social-icons">
+      
+      <a href="https://www.instagram.com/royceprints"><i class="social-icon fa fa-instagram"></i></a>
+    </div>
+  </div>
+   <!-- Form Section -->
+    <div id="formSection">
+      <p id="royceprints"><a href="">Close</a></p>
+      <form>
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required><br>
+        <label for="phone">Phone:</label>
+        <input type="tel" id="phone" name="phone" required><br>
+        <label for="address">Address:</label>
+        <textarea id="address" name="address" required></textarea><br>
+        <div class="productformdetails">
+         <div class="productformimage"><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgXxolrpNRsDn5RoMA3x4Bv5c2AYq-m__8smAfbo-FdYZ65aAiQM9ZopkqYZ9Ho4N7TyFKiw38vMM2mSXxRpQGVd1Qb7XkehAHSL4eHmKJqjdSAcZO6bsYR5DsSYs8YcCQ5tsMv2ARSgJuMbpf06XcYF8RLI28PCl5mQImHAIaLsyBB19m7bnJv95vpqjE/s320/men-rnhs-0038%20(14).png"></div>
+         <div class="otherdetails">
+          <h3>Product Title</h3>
+            <p>Price: ₹499</p>
+            <p>Size: M</p></div>
+            </div>
+        <label for="quantity">Quantity:</label>
+        <input type="number" id="quantity" name="quantity" min="1" value="1" required><br>
+        <button type="submit">Submit</button>
+
+        
+      </form>
+    </div>
+  </div>
+  
+ <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+  <script>
+    // Initialize Swiper
+    var swiper = new Swiper('.swiper-container', {
+      slidesPerView: 1,
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+    });
+  </script>
+<script>
+
+ $(document).ready(function() {
+      $("#blacks").click(function() {
+         $("#white1").hide();
+        $("#white2").hide();
+       $("#black1").show();
+       $("#black2").show();
+      
+      });
+    });
+
+
+    $(document).ready(function() {
+      $("#whites").click(function() {
+        $("#white1").show();
+        $("#white2").show();
+       $("#black1").hide();  
+        $("#black2").hide();  
+      });
+    });
+
+
+$(document).ready(function() {
+      var clickCount = 0;
+      var maxClicks = 2;
+
+      $("#black1").show();
+      $("#black2").show();
+
+      $("#blacks").click(function() {
+        clickCount++;
+
+        
+
+        if (clickCount <= maxClicks) {
+          $("#black1").show();
+          $("#black2").show();
+          $("#white1").hide();
+          $("#white2").hide();
+        }
+      });
+    });
+
+ $(document).ready(function() {
+      $("#cartButton").click(function() {
+        // Hide the slider
+        $("#swiperCont").hide();
+        $("#dataone").hide();
+        $("#datae").hide();
+          $("#dataon").css("display" , "none");
+        
+        // Show the form section
+        $("#formSection").show();
+      });
+    });
+
+ $(document).ready(function() {
+      $("#royceprints").click(function() {
+        // Hide the slider
+        $("#swiperCont").show();
+        $("#dataone").show();
+        $("#datae").show();
+          $("#dataon").css("display" , "block");
+        
+        // Show the form section
+        $("#formSection").hide();
+      });
+    });
+  </script>
+  
+</body>
+</html>
